@@ -14,7 +14,13 @@ app.use(express.json());
 // Home route
 app.get("/", (req, res) => {
   res.send({
-    message: "Welcome to the KoinX Backend task ",
+    message: "Welcome to the Crypto Price Tracker API",
+    routes: {
+      stats: "/api/stats?coin=bitcoin",
+      deviation: "/api/deviation?coin=bitcoin",
+    },
+    description:
+      "Use /api/stats and /api/deviation endpoints to get crypto data",
   });
 });
 
