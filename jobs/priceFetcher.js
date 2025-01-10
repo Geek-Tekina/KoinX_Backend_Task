@@ -1,11 +1,22 @@
 const axios = require("axios");
 const Crypto = require("../models/crypto");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const fetchCryptoPrices = async () => {
   try {
+    const apiKey = process.env.COINGECKO_API_KEY;
+
+    if (!apiKey) {
+      throw new Error("API key is missing");
+    }
+
     const response = await axios.get(
       "https://api.coingecko.com/api/v3/simple/price",
       {
+        headers: {
+          "x-cg-demo-api-key": apiKey,
+        },
         params: {
           ids: "bitcoin,ethereum,matic-network",
           vs_currencies: "usd",
