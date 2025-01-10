@@ -36,6 +36,7 @@ Create a `.env` file in the root of the project with the following content:
 
 ```env
 MONGO_URI=your_mongo_connection_string
+COINGECKO_API_KEY = your_coingecko_api_key
 ```
 Replace `your_mongo_connection_string` with your actual MongoDB connection string.
 
@@ -61,6 +62,7 @@ Visit `http://localhost:5000/` to check the home route and available API endpoin
      - **Start Command**: `npm start`
 3. **Add Environment Variables** in Render:
    - `MONGO_URI`: Add your MongoDB connection string.
+   - `COINGECKO_API_KEY` : Add your coingecko api key
 
 4. **Deploy**: Render will automatically build and deploy your project.
 
