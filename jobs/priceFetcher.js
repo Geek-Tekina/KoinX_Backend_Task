@@ -1,4 +1,5 @@
 const axios = require("axios");
+const Crypto = require("../models/crypto");
 
 const fetchCryptoPrices = async () => {
   try {
@@ -15,11 +16,33 @@ const fetchCryptoPrices = async () => {
     );
 
     const { bitcoin, ethereum, "matic-network": matic } = response.data;
-    console.log("Coins Fetched - ", bitcoin, ethereum, matic);
+
+    const cryptos = [
+      {
+        coin: "bitcoin",
+        price: bitcoin.usd,
+        marketCap: bitcoin.usd_market_cap,
+        change24h: bitcoin.usd_24h_change,
+      },
+      {
+        coin: "ethereum",
+        price: ethereum.usd,
+        marketCap: ethereum.usd_market_cap,
+        change24h: ethereum.usd_24h_change,
+      },
+      {
+        coin: "matic-network",
+        price: matic.usd,
+        marketCap: matic.usd_market_cap,
+        change24h: matic.usd_24h_change,
+      },
+    ];
+
+    await Crypto.insertMany(cryptos);
     console.log("Crypto data fetched and stored:", new Date().toISOString());
   } catch (error) {
     console.error("Error fetching crypto prices:", error.message);
   }
 };
 
-fetchCryptoPrices();
+module.exports = fetchCryptoPrices;
